@@ -1,0 +1,6 @@
+{
+    "schemaType": "NERDLET",
+    "id": "status-board-nerdlet",
+    "displayName": "Status Wall Board",
+    "description": "A wall board full of status"
+}

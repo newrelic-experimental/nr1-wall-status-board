@@ -1,0 +1,295 @@
+//Custom fonts
+
+@import "../../components/Configurator/styles.scss";
+@import url('https://fonts.googleapis.com/css?family=Roboto|Rubik&display=swap');
+
+
+$main_font: "Rubik", sans-serif;
+$title_font: "Roboto", sans-serif;
+
+//Dark mode
+$background_color: black;           //main background color
+$text_color: white;                 //main title colors
+$rule_color: #70CDD3;               //title horizontal rule color
+$config_loader_text_color: grey;    //loading text color
+$page_link_color: #7b7979;          //page link nav color
+$history_label: grey;               //label text hostory color
+
+$widget_bg: #272727;                //background color of widget block
+$widget_loading_color: grey;        //loading text color       
+$widget_header_bg: #3D8C99;         //background color of widget heading
+$widget_header_fg: #fff;            //text color of widget heading
+$widget_value_suffix_color: grey;   //text colour of value suffix 
+$widget_extra_infor_color: #acacac; //text colour of extra info text
+
+$history_block_critical: #ca0000;   //critical block
+$history_block_warning: #eb8e03;    //warning block
+$history_block_normal: #1f863a;     //normal black
+
+$widget_header_bg_critical: #ca0000;    //header background color
+$widget_header_fg_critical: white;  //header text color
+$glow_critical_start: #490707;      //widget background glow start color
+$glow_critical_end: #880c0c;        //widget background glow end color (set same as start for no glow)
+
+$widget_header_bg_warning: #eb8e03; //same as above
+$widget_header_fg_warning: white;
+$glow_warning_start: #30220e;
+$glow_warning_end: #5e421a;
+
+
+// Example for a custom font from woff
+
+// @font-face {
+//     font-family: CustomFont;
+//     src: url('https://www.someurl.com/font.woff2');
+// }
+// @font-face {
+//     font-family: CustomFont;
+//     src: url('https://www.someurl.com/font-bold.woff2');
+//     font-weight: bold;
+// }
+// $main_font: "CustomFont", sans-serif;
+// $title_font: "CustomFont", sans-serif;
+
+
+.clear { clear:both;}
+.OuterContainer {
+    background-color: $background_color;
+    min-width: 100%;
+    min-height: 100%;
+    color: $text_color;
+    font-family: $main_font;
+
+    h1,h2,h3 {
+        margin: 0;
+    }
+    .LogoHeader {
+        height: 5vw;
+        padding: 2vw;
+        .DashboardTitle {
+            font-family: $title_font;
+            font-size: 2.5vw;
+            padding-left: 4vw;
+            height: 4vw;
+            line-height: 4vw;
+            float:left;
+        }
+        .DashboardLogo {
+            height:4vw;
+            float:left;
+    
+        }
+        .NRLogo { 
+            float:right;
+            height:3vw;
+          
+        }
+        .NRLogoImg {
+            height:3vw;
+        }
+    }
+
+    .ConfigLoader {
+        clear: both;
+        margin: auto;
+        width: 50%;
+        text-align: center;
+        font-size: 1vw;
+        margin-top: 10vw;
+        color: $config_loader_text_color;
+    }
+
+    .GridContainer {
+        clear:both;
+        margin-top:2vw;
+        padding-top:2vw;
+        margin-bottom:2vw;
+
+        .GridGroup {
+            width: 45%;
+            float:left;
+            margin-left: 3vw;
+        }
+        .GridGroup:nth-child(odd) {
+            margin-left: 2vw;
+        }
+        h1 { 
+            
+            width: 100%;
+            text-align:center;
+            font-family: $title_font;
+            font-size: 1.5vw;
+        } 
+        hr {
+            margin-top: 0.5vw;
+            border: solid 2px $rule_color;
+        }
+        .groupSeperator {
+            clear:both;
+            padding-top:3vw;
+        }
+        
+     }
+
+     .configureButton {
+         clear:both;
+         margin-top:2vw;
+         margin-left: 1vw;
+     }
+     
+}
+
+
+.StatusBlock {
+    border: solid $background_color 1px;
+    height: 10vw;
+    margin-top: 1vw;
+    background-color: $widget_bg;
+    position:relative;
+
+    h2 {
+        font-family: $main_font;
+        background-color: $widget_header_bg;
+        color: $widget_header_fg;
+        font-size: 0.8vw;
+        padding: 0.2vw;
+        padding-left:0.5em;
+        font-weight: bold;
+    }
+    .BigValue {
+        margin-top: 1vw;
+        font-size: 2vw;
+        text-align: center;
+
+        .BigValueSuffix {
+            font-size: 0.8vw;
+            text-transform: uppercase;
+            color: $widget_value_suffix_color;
+            padding-left: 0.5vw;
+
+        }
+    }
+    .BigValueLabel {
+        text-align:center;
+        text-transform: uppercase;
+    }
+    .ExtraInfo {
+        text-align:center;
+        color:$widget_extra_infor_color;
+        margin-bottom:0.5vw;
+        font-size: 0.7vw;
+        
+    }
+    .HistoryBlocksContainer {
+        text-align:center;
+        position: absolute;
+        bottom: 0.5vw;
+        left: 0;
+        right: 0;
+    }
+    .HistoryBlocks {
+        text-align:center;
+        margin: auto;
+        height: 0.8vw;
+        border: none;
+        display: inline-block;
+    }
+    .HistoryBlock {
+        background-color:#000000;
+        width: 0.34vw;
+        float:left;
+        margin-right: 0.2vw;
+        height: 0.9vw;
+    }
+
+    .HBCritical {
+        background-color:$history_block_critical;
+    }
+    .HBWarning {
+        background-color:$history_block_warning;
+    }
+    .HBNormal {
+        background-color:$history_block_normal;
+    }
+
+    .historyLabel {
+        text-align:right;
+        font-size: 0.5vw;
+        color:$history_label;
+        text-transform:uppercase;
+        padding-right:0.2vw;
+    }
+    .historyLabelRight { float:right;}
+    .historyLabelLeft { float:left;}
+
+
+    .WidgetLoading {
+        margin-top: 1vw;
+        font-size: 1vw;
+        text-align: center;
+        color: $widget_loading_color;
+    }
+}
+
+@keyframes criticalGlow {
+    0% { background-color:$glow_critical_start; }
+    50% { background-color:$glow_critical_end; }
+    100% { background-color:$glow_critical_start; }
+}
+
+.critical {
+    border: solid $widget_header_bg_critical 1px;
+    background-color: $glow_critical_start;
+    animation: criticalGlow 3000ms infinite;
+    h2 {
+        font-family: $main_font;
+        background-color: $widget_header_bg_critical;
+        color: widget_header_fg_critical;
+        font-size: 0.8vw;
+        padding: 0.2vw;
+        padding-left:0.5em;
+    }
+}
+
+
+@keyframes warningGlow {
+    0% { background-color:$glow_warning_start; }
+    50% { background-color:$glow_warning_end; }
+    100% { background-color:$glow_warning_start; }
+}
+
+.warning {
+    border: solid $widget_header_bg_warning 1px;
+    background-color: $glow_warning_start;
+    animation: warningGlow 3000ms infinite;
+    h2 {
+        font-family: $main_font;
+        background-color: $widget_header_bg_warning;
+        color: $widget_header_fg_warning;
+        font-size: 0.8vw;
+        padding: 0.2vw;
+        padding-left:0.5em;
+    }
+}
+
+.pageNavigation {
+    padding-left: 1vw;
+    padding-top: 2vw;
+    .pageLink {
+        padding-right: 2em;
+        color: $page_link_color;
+    }
+}
+
+.hideNavigation {
+    display:none;
+}
+
+.configContainer label {
+    color: #2d8ba7;
+    font-size: 1.2em;
+}
+
+.configContainer .field-description {
+    color: #717171;
+}

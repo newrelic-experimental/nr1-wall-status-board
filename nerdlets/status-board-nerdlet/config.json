@@ -1,0 +1,7 @@
+{
+    "accountId": 1,
+
+    
+    "storageCollection": "StatusBoardConfiguration",
+    "newrelicBaseUrl": "https://one.newrelic.com"
+}

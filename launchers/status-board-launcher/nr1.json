@@ -1,0 +1,7 @@
+{
+    "schemaType": "LAUNCHER",
+    "id": "status-board-launcher",
+    "description": "Status board for wall screens",
+    "displayName": "Status Wall Board",
+    "rootNerdletId": "status-board-nerdlet"
+}

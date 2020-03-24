@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "name": "status-board",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "nr1 nerdpack:serve",
+    "test": "exit 0"
+  },
+  "dependencies": {
+    "moment": "^2.24.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-jsonschema-form": "^1.8.1"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not ie < 11",
+    "not dead"
+  ]
+}
