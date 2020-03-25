@@ -244,7 +244,7 @@ $glow_warning_end: #5e421a;
     h2 {
         font-family: $main_font;
         background-color: $widget_header_bg_critical;
-        color: widget_header_fg_critical;
+        color: $widget_header_fg_critical;
         font-size: 0.8vw;
         padding: 0.2vw;
         padding-left:0.5em;
