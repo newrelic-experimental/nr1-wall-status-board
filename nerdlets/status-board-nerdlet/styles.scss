@@ -7,7 +7,8 @@
 $main_font: "Rubik", sans-serif;
 $title_font: "Roboto", sans-serif;
 
-//Dark mode
+//Dark mode--------------
+
 $background_color: black;           //main background color
 $text_color: white;                 //main title colors
 $rule_color: #70CDD3;               //title horizontal rule color
@@ -24,7 +25,8 @@ $widget_extra_infor_color: #acacac; //text colour of extra info text
 
 $history_block_critical: #ca0000;   //critical block
 $history_block_warning: #eb8e03;    //warning block
-$history_block_normal: #1f863a;     //normal black
+$history_block_normal: #1f863a;     //normal block
+$history_block_nodata: #000000;     //no data block
 
 $widget_header_bg_critical: #ca0000;    //header background color
 $widget_header_fg_critical: white;  //header text color
@@ -35,6 +37,38 @@ $widget_header_bg_warning: #eb8e03; //same as above
 $widget_header_fg_warning: white;
 $glow_warning_start: #30220e;
 $glow_warning_end: #5e421a;
+
+
+//light mode------------
+
+// $background_color: white;           //main background color
+// $text_color: #535353;                 //main title colors
+// $rule_color: #D82128;               //title horizontal rule color
+// $config_loader_text_color: grey;    //loading text color
+// $page_link_color: #7b7979;          //page link nav color
+// $history_label: grey;               //label text hostory color
+
+// $widget_bg: #f3f3f3;                //background color of widget block
+// $widget_loading_color: grey;        //loading text color       
+// $widget_header_bg: #ebebeb;         //background color of widget heading
+// $widget_header_fg: #d82128;            //text color of widget heading
+// $widget_value_suffix_color: grey;   //text colour of value suffix 
+// $widget_extra_infor_color: #acacac; //text colour of extra info text
+
+// $history_block_critical: #ff0000;   //critical block
+// $history_block_warning: #ff9900;    //warning block
+// $history_block_normal: #1f863a;     //normal block
+// $history_block_nodata: #bfbfbf;     //normal block
+
+// $widget_header_bg_critical: #D82128;    //header background color
+// $widget_header_fg_critical: white;  //header text color
+// $glow_critical_start: #ffd2cb;      //widget background glow start color
+// $glow_critical_end: #f3f3f3;        //widget background glow end color (set same as start for no glow)
+
+// $widget_header_bg_warning: #ff9900; //same as above
+// $widget_header_fg_warning: white;
+// $glow_warning_start: #f8d7a9;
+// $glow_warning_end: #f3f3f3;
 
 
 // Example for a custom font from woff
@@ -292,4 +326,9 @@ $glow_warning_end: #5e421a;
 
 .configContainer .field-description {
     color: #717171;
+}
+
+.configButton {
+    background-color: $widget_bg;
+    color: $widget_loading_color;
 }

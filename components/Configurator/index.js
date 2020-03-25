@@ -246,7 +246,7 @@ export default class Configurator extends React.Component {
         } 
 
          return <div>
-            <button className="btn u-unstyledButton" style={{backgroundColor:"#1c1c1c", color:"grey"}} onClick={()=>{this.setState({configVisible: !configVisible})}}>
+            <button className="btn u-unstyledButton configButton" onClick={()=>{this.setState({configVisible: !configVisible})}}>
                 <Icon spacingType={[Icon.SPACING_TYPE.SMALL]} type={Icon.TYPE.INTERFACE__OPERATIONS__CONFIGURE} inline ></Icon> {buttonTitle ? buttonTitle : "Configuration"}
             </button>
 
