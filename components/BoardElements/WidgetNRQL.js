@@ -42,7 +42,7 @@ export default class WidgetNRQL extends Component {
 
     
         const variables = {
-            id: accountId
+            id: Number(accountId)
         }
 
         //add any additional queries to the graphql
