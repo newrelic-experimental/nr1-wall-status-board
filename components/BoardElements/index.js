@@ -21,7 +21,7 @@ export class StatusGroup extends Component {
             return <Grid key={idx}>{group}</Grid>
         })
 
-        let width="100%"
+        let width="95%"
         if(columns==3) { width="45%"}
         if(columns==2) { width="30%"}
     
