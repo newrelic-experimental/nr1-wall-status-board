@@ -14,7 +14,7 @@ import { Spinner, nerdlet, NerdletStateContext, Link } from 'nr1'
 
 export default class StatusBoardNerdlet extends React.Component {
 
-    constructor(props) {
+    constructor(props) { 
         super(props);
         
         this.accountId=CONFIG.accountId //this can be overriden by widgets but is used for persistent storage
@@ -108,6 +108,11 @@ export default class StatusBoardNerdlet extends React.Component {
                                                                 "type": "string",
                                                                 "title": "Value field name",
                                                                 "description": "Name of the field containing the value to be tested against thresholds. Enable debug mode and look in the console log to understand which fields are vailable for your query."
+                                                            },
+                                                            "subField": {
+                                                                "type": "string",
+                                                                "title": "Value sub field name",
+                                                                "description": "The subfield of the value, if there is one. e.g. for percentile results"
                                                             },
                                                             "roundTo": {
                                                                 "type": "number",
@@ -250,8 +255,8 @@ export default class StatusBoardNerdlet extends React.Component {
         this.setState({"autoPage":nextPage})
     }
 
-    nrqlThresholdWidget(config,autoRefresh, idx) {
-        return <WidgetNRQL key={idx} accountId={this.accountId} config={config} autoRefresh={autoRefresh}/>
+    nrqlThresholdWidget(config,autoRefresh, idx, page) {
+        return <WidgetNRQL key={idx} accountId={this.accountId} config={config} autoRefresh={autoRefresh} pageRef={page}/>
     }
 
     placeHolderWidget(title,status,label,idx) {
@@ -314,7 +319,7 @@ export default class StatusBoardNerdlet extends React.Component {
                                 
                                 let widgetRender= <div>Not implemented</div>
                                     if(widget.title) {
-                                        widgetRender = this.nrqlThresholdWidget(widget, config.autoRefresh,idx)
+                                        widgetRender = this.nrqlThresholdWidget(widget, config.autoRefresh,idx,currentPage)
                                     }
                                     if(widget.ph_title) {
                                         widgetRender = this.placeHolderWidget(widget.ph_title,widget.ph_status, widget.ph_label,idx)

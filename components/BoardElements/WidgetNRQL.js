@@ -22,13 +22,21 @@ export default class WidgetNRQL extends Component {
         this.autoRefresh = setInterval(() => this.loadData(), this.props.autoRefresh ? this.props.autoRefresh*1000 : 60*1000) //auto refresh 1 minute;
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.pageRef!==this.props.pageRef){
+            this.setState({data: null})
+            this.loadData()
+
+        }
+    }
+
     componentWillUnmount() {
         clearInterval(this.autoRefresh);
     }
 
     loadData() {
         const { config } = this.props
-        const { nrql,field, bucketSize, untilSeconds, additionalQueries} = config
+        const { nrql,field, subField, bucketSize, untilSeconds, additionalQueries} = config
         let accountId = config.accountId ? config.accountId : this.props.accountId
 
 
@@ -70,13 +78,17 @@ export default class WidgetNRQL extends Component {
     `
         const x = NerdGraphQuery.query({ query: query, variables: variables, fetchPolicyType: NerdGraphQuery.FETCH_POLICY_TYPE.NO_CACHE });
         x.then(results => {
+            console.log("results",results)
             if(config.debugMode===true) {
                 console.log(`DEBUG MODE ENABLED: ${config.title}`,results.data.actor.account)
             }
             let bucketData=results.data.actor.account.buckets.results
+            
+            let itemCurrentData = subField ? results.data.actor.account.recent.results[0][field][subField] : results.data.actor.account.recent.results[0][field]
+            
             let data = {
-                "current": results.data.actor.account.recent.results[0][field],
-                "history": bucketData.map((item)=>{return {value: item[field], startTime:item.beginTimeSeconds, endTime: item.endTimeSeconds}})
+                "current": itemCurrentData,
+                "history": bucketData.map((item)=>{let itemHistoryData = subField ? item[field][subField] : item[field]; return {value: itemHistoryData, startTime:item.beginTimeSeconds, endTime: item.endTimeSeconds}})
             }
             if(additionalQueries) {
                 data.additional={}
