@@ -3,7 +3,7 @@
 */
 
 
-import CONFIG from './config.json'
+import CONFIG from '../../config.json'
 import React from 'react'
 import BrandLogo from './brand_logo.png'
 import NRLogo from './nrlogo.png'
@@ -286,7 +286,6 @@ export default class StatusBoardNerdlet extends React.Component {
             let statusBoard=<div className="ConfigLoader"><Spinner inline spacingType={[Spinner.SPACING_TYPE.NONE,Spinner.SPACING_TYPE.SMALL,Spinner.SPACING_TYPE.NONE,Spinner.SPACING_TYPE.NONE]} /> Loading configuration... </div>
             let pages, pagesTVMode, pageTitle, bottomConfigBar
             if(config && config.pages) {
-                
                 let statusBoardComponents=[]
                 let currentPage,pageConfig
                 if(nerdletState.tvMode===true && config.pageAutoRotate && config.pageAutoRotate > 0 && config.pages.length > 1) {
@@ -362,7 +361,7 @@ export default class StatusBoardNerdlet extends React.Component {
                 })
                 pagesTVMode=<a target="_blank" href={this.newrelicBaseUrl+nerdletLocation.pathname+'?platform[tvMode]=true&'+nerdletLocation.search} className="u-unstyledLink pageLink" >TV Mode</a> 
                 
-            }
+    }
             
             //hide the nav and config when in full screen tv mode
             bottomConfigBar=<div className={nerdletState.tvMode===true ? "hideNavigation" : ""}>

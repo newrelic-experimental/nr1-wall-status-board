@@ -78,18 +78,33 @@ export default class WidgetNRQL extends Component {
     `
         const x = NerdGraphQuery.query({ query: query, variables: variables, fetchPolicyType: NerdGraphQuery.FETCH_POLICY_TYPE.NO_CACHE });
         x.then(results => {
-            console.log("results",results)
             if(config.debugMode===true) {
                 console.log(`DEBUG MODE ENABLED: ${config.title}`,results.data.actor.account)
             }
+    
             let bucketData=results.data.actor.account.buckets.results
             
-            let itemCurrentData = subField ? results.data.actor.account.recent.results[0][field][subField] : results.data.actor.account.recent.results[0][field]
+            let itemCurrentData
+            if(!results.data.actor.account.recent.results[0][field]) {
+                console.error(`Error with '${config.title}' panel: Please supply a field name to access the data returned. `,results.data.actor.account.buckets.results)
+            } else {
+                itemCurrentData = results.data.actor.account.recent.results[0][field]
+            }
             
+            if(typeof results.data.actor.account.recent.results[0][field] == "object") {
+                if(subField && results.data.actor.account.recent.results[0][field][subField]) {
+                    itemCurrentData = results.data.actor.account.recent.results[0][field][subField]
+                    
+                } else {
+                    console.error(`Error with '${config.title}' panel: Please supply a sub field name to access the object returned. `,results.data.actor.account.buckets.results)
+                }
+            }
+
             let data = {
                 "current": itemCurrentData,
                 "history": bucketData.map((item)=>{let itemHistoryData = subField ? item[field][subField] : item[field]; return {value: itemHistoryData, startTime:item.beginTimeSeconds, endTime: item.endTimeSeconds}})
             }
+
             if(additionalQueries) {
                 data.additional={}
                 Object.keys(additionalQueries).forEach((key)=>{
