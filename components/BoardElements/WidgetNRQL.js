@@ -94,8 +94,8 @@ export default class WidgetNRQL extends Component {
             if(typeof results.data.actor.account.recent.results[0][field] == "object") {
                 if(subField && results.data.actor.account.recent.results[0][field][subField]) {
                     itemCurrentData = results.data.actor.account.recent.results[0][field][subField]
-                    
                 } else {
+                    itemCurrentData=null
                     console.error(`Error with '${config.title}' panel: Please supply a sub field name to access the object returned. `,results.data.actor.account.buckets.results)
                 }
             }
