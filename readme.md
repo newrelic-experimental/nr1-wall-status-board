@@ -45,5 +45,5 @@ When you provide your NRQL query try to alias the value you want to dusplay. Thi
 You can provide thresholds for warning and critical states. These can either be numeric thresholds or regular expressions. You can choosew to display the value or provide an label for each state. This might be useful if the value itself is not very meaningful and a label would provide simpler cognitive effort.
 
 #### Panels: Custom Features
-An example custom feature is included called `example`. What this demonstrates is how to specify additional NRQL queries for the panel to enrich it further. For instance the demo data shows the numer of transactions for all apps, and then as an enrichment shows how many apps are reporting. Its possible to easily add extra features like this without the need to worry about the loading of data.
+An example custom feature is included called `example`. What this demonstrates is how to specify additional NRQL queries for the panel to enrich it further. For instance the demo data shows the numer of transactions for all apps, and then as an enrichment shows how many apps are reporting. Its possible to easily add extra features like this without the need to worry about the loading of data..
 
