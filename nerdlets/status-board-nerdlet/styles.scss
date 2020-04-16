@@ -6,6 +6,7 @@
 
 $main_font: "Rubik", sans-serif;
 $title_font: "Roboto", sans-serif;
+$panel_header_font: $main_font;
 
 //Dark mode--------------
 
@@ -182,7 +183,7 @@ $glow_warning_end: #5e421a;
     position:relative;
 
     h2 {
-        font-family: $main_font;
+        font-family: $panel_header_font;
         background-color: $widget_header_bg;
         color: $widget_header_fg;
         font-size: 0.8vw;
@@ -276,7 +277,6 @@ $glow_warning_end: #5e421a;
     background-color: $glow_critical_start;
     animation: criticalGlow 3000ms infinite;
     h2 {
-        font-family: $main_font;
         background-color: $widget_header_bg_critical;
         color: $widget_header_fg_critical;
         font-size: 0.8vw;
@@ -297,7 +297,6 @@ $glow_warning_end: #5e421a;
     background-color: $glow_warning_start;
     animation: warningGlow 3000ms infinite;
     h2 {
-        font-family: $main_font;
         background-color: $widget_header_bg_warning;
         color: $widget_header_fg_warning;
         font-size: 0.8vw;
