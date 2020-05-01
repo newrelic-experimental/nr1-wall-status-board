@@ -46,7 +46,7 @@ export default class WidgetNRQL extends Component {
         now.subtract(1,'minutes') //exclude the last minute of data
         let endTime = date_round(now, moment.duration(bucketSize, 'minutes'))
         let startTime= endTime.clone().subtract(bucketSize*24,'minutes')
-
+        let sinceAdjusted = Number(bucketSize) +  Math.round(Number(untilSeconds)/60)
 
     
         const variables = {
@@ -58,7 +58,7 @@ export default class WidgetNRQL extends Component {
         if(additionalQueries) {
             Object.keys(additionalQueries).forEach((key)=>{
                 //only add the recent restriction if no since clause already
-                let q=additionalQueries[key].toLowerCase().includes("since")  ? additionalQueries[key] : `${additionalQueries[key]}  since ${bucketSize} minutes ago until ${untilSeconds} seconds ago`
+                let q=additionalQueries[key].toLowerCase().includes("since")  ? additionalQueries[key] : `${additionalQueries[key]}  since ${sinceAdjusted} minutes ago until ${untilSeconds} seconds ago`
                 extraNRQL+=`
                     ${key}: nrql(query: "${q}") {results}
                 `
@@ -69,7 +69,7 @@ export default class WidgetNRQL extends Component {
         query($id: Int!) {
             actor {
                 account(id: $id) {
-                    recent: nrql(query: "${nrql} since ${bucketSize} minutes ago until ${untilSeconds} seconds ago") {results}
+                    recent: nrql(query: "${nrql} since ${sinceAdjusted} minutes ago until ${untilSeconds} seconds ago") {results}
                     buckets: nrql(query: "${nrql} timeseries ${bucketSize} minutes since ${startTime.unix()} until ${endTime.unix()}") {results}
                     ${extraNRQL}
                 }
@@ -84,21 +84,28 @@ export default class WidgetNRQL extends Component {
     
             let bucketData=results.data.actor.account.buckets.results
             
-            let itemCurrentData
-            if(!results.data.actor.account.recent.results[0][field]) {
-                console.error(`Error with '${config.title}' panel: Please supply a field name to access the data returned. `,results.data.actor.account.buckets.results)
-            } else {
-                itemCurrentData = results.data.actor.account.recent.results[0][field]
-            }
-            
-            if(typeof results.data.actor.account.recent.results[0][field] == "object") {
-                if(subField && results.data.actor.account.recent.results[0][field][subField]) {
-                    itemCurrentData = results.data.actor.account.recent.results[0][field][subField]
+            let itemCurrentData=null
+            if(results.data.actor.account.recent.results.length > 0 ){
+                if(!results.data.actor.account.recent.results[0][field]) {
+                    if(results.data.actor.account.recent.results[0][field]!=null) {
+                        console.error(`Error with '${config.title}' panel: Please supply a field name to access the data returned. `,results.data.actor.account.buckets.results)
+                    }
                 } else {
-                    itemCurrentData=null
-                    console.error(`Error with '${config.title}' panel: Please supply a sub field name to access the object returned. `,results.data.actor.account.buckets.results)
+                    itemCurrentData = results.data.actor.account.recent.results[0][field]
+                }
+                
+                if(typeof results.data.actor.account.recent.results[0][field] == "object") {
+                    if(subField && results.data.actor.account.recent.results[0][field][subField]) {
+                        itemCurrentData = results.data.actor.account.recent.results[0][field][subField]
+                    } else {
+                        itemCurrentData=null
+                        if(results.data.actor.account.recent.results[0][field]!=null) {
+                            console.error(`Error with '${config.title}' panel: Please supply a sub field name to access the object returned. `,results.data.actor.account.buckets.results)
+                        }
+                    }
                 }
             }
+
 
             let data = {
                 "current": itemCurrentData,
