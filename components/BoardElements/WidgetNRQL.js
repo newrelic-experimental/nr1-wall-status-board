@@ -85,18 +85,20 @@ export default class WidgetNRQL extends Component {
 
             let itemCurrentData=null
             if (results.data.actor.account.recent.results.length > 0){
-                if (results.data.actor.account.recent.results[0][field] !== undefined) {
-                    itemCurrentData = results.data.actor.account.recent.results[0][field]
+                let checkedField = checkFieldName(field, results.data.actor.account.recent.results[0])
+
+                if (results.data.actor.account.recent.results[0][checkedField] !== undefined) {
+                    itemCurrentData = results.data.actor.account.recent.results[0][checkedField]
                 } else {
                     console.error(`Error with '${config.title}' panel: Please supply a field name to access the data returned.`, results.data.actor.account.buckets.results)
                 }
 
-                if (typeof results.data.actor.account.recent.results[0][field] === 'object') {
+                if (typeof results.data.actor.account.recent.results[0][checkedField] === 'object') {
                     if (subField == null) {
                         itemCurrentData = null
                         console.error(`Error with '${config.title}' panel: Please supply a sub field name to access the object returned.`, results.data.actor.account.buckets.results)
                     } else {
-                        itemCurrentData = results.data.actor.account.recent.results[0][field][subField]
+                        itemCurrentData = results.data.actor.account.recent.results[0][checkedField][subField]
 
                         if (itemCurrentData === undefined) {
                             itemCurrentData = null
@@ -108,7 +110,7 @@ export default class WidgetNRQL extends Component {
 
             let data = {
                 "current": itemCurrentData,
-                "history": bucketData.map((item)=>{let itemHistoryData = subField ? item[field][subField] : item[field]; return {value: itemHistoryData, startTime:item.beginTimeSeconds, endTime: item.endTimeSeconds}})
+                "history": bucketData.map((item)=>{let itemHistoryData = subField ? item[checkedField][subField] : item[checkedField]; return {value: itemHistoryData, startTime:item.beginTimeSeconds, endTime: item.endTimeSeconds}})
             }
 
             if(additionalQueries) {
@@ -227,4 +229,18 @@ export default class WidgetNRQL extends Component {
             return <><StatusBlock title={title} /></>
         }
     }
+}
+
+function checkFieldName (field, results) {
+    let ret = field
+
+    if (field == null) {
+        if (Object.getOwnPropertyNames(results)[0] != null) {
+            ret = Object.getOwnPropertyNames(results)[0]
+
+            console.log(`No field name was specified, defaulting to first property name '${ret}'.`)
+        }
+    }
+
+    return ret
 }
