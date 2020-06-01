@@ -106,7 +106,7 @@ export  class StatusBlock extends Component {
         }
            
         let loadingData=""
-        if(!bigValue) {
+        if(bigValue == null) {
             loadingData=<div className="WidgetLoading">Loading...</div>
         }
 
