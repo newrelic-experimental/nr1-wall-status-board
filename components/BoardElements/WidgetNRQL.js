@@ -85,12 +85,10 @@ export default class WidgetNRQL extends Component {
             
             let itemCurrentData=null
             if(results.data.actor.account.recent.results.length > 0 ){
-                if(!results.data.actor.account.recent.results[0][field]) {
-                    if(results.data.actor.account.recent.results[0][field]!=null) {
-                        console.error(`Error with '${config.title}' panel: Please supply a field name to access the data returned. `,results.data.actor.account.buckets.results)
-                    }
-                } else {
+                if(results.data.actor.account.recent.results[0][field] !== undefined) {
                     itemCurrentData = results.data.actor.account.recent.results[0][field]
+                } else {
+                    console.error(`Error with '${config.title}' panel: Please supply a field name to access the data returned. `,results.data.actor.account.buckets.results)
                 }
 
                 if(typeof results.data.actor.account.recent.results[0][field] == "object") {
