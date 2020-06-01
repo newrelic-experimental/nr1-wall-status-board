@@ -39,7 +39,6 @@ export default class WidgetNRQL extends Component {
         const { nrql,field, subField, bucketSize, untilSeconds, additionalQueries} = config
         let accountId = config.accountId ? config.accountId : this.props.accountId
 
-
         //The history buckets need to be fixed time periods so that the data within them doesnt shift as time progresses. So lets find the end of the last bucket rounded to a fixed time interval such as 5 minutes
         const date_round = function(date, duration) { return moment(Math.floor((+date)/(+duration)) * (+duration)) }
         let now = moment()
@@ -48,7 +47,6 @@ export default class WidgetNRQL extends Component {
         let startTime= endTime.clone().subtract(bucketSize*24,'minutes')
         let sinceAdjusted = Number(bucketSize) +  Math.round(Number(untilSeconds)/60)
 
-    
         const variables = {
             id: Number(accountId)
         }
@@ -62,9 +60,9 @@ export default class WidgetNRQL extends Component {
                 extraNRQL+=`
                     ${key}: nrql(query: "${q}") {results}
                 `
-            }) 
+            })
         }
-    
+
         let query = `
         query($id: Int!) {
             actor {
@@ -75,13 +73,14 @@ export default class WidgetNRQL extends Component {
                 }
             }
         }
-    `
+        `
+
         const x = NerdGraphQuery.query({ query: query, variables: variables, fetchPolicyType: NerdGraphQuery.FETCH_POLICY_TYPE.NO_CACHE });
         x.then(results => {
             if(config.debugMode===true) {
                 console.log(`DEBUG MODE ENABLED: ${config.title}`,results.data.actor.account)
             }
-    
+
             let bucketData=results.data.actor.account.buckets.results
             
             let itemCurrentData=null
@@ -93,7 +92,7 @@ export default class WidgetNRQL extends Component {
                 } else {
                     itemCurrentData = results.data.actor.account.recent.results[0][field]
                 }
-                
+
                 if(typeof results.data.actor.account.recent.results[0][field] == "object") {
                     if(subField && results.data.actor.account.recent.results[0][field][subField]) {
                         itemCurrentData = results.data.actor.account.recent.results[0][field][subField]
@@ -105,7 +104,6 @@ export default class WidgetNRQL extends Component {
                     }
                 }
             }
-
 
             let data = {
                 "current": itemCurrentData,
@@ -133,7 +131,6 @@ export default class WidgetNRQL extends Component {
         }
     }
 
-
     render() {
         let {config} = this.props
         let {title, roundTo, valueLabel, valueSuffix, thresholdType, thresholdDirection, thresholdCritical, thresholdCriticalLabel, thresholdWarning, thresholdWarningLabel, thresholdNormalLabel, customFeature, link} = config
@@ -151,23 +148,21 @@ export default class WidgetNRQL extends Component {
                         returnType =  (val >= thresholdCritical) ? "C" : returnType
                     }
                 }
-                if(thresholdType == "string") {                    
+                if(thresholdType == "string") {
                     try {
                         if(thresholdWarning) {
                             let regexW = new RegExp(thresholdWarning)
-                        
+
                             if( regexW.test(val) ) {
                                 returnType= "W"
-                            } 
+                            }
                         }
                         if(thresholdCritical) {
                             let regexC = new RegExp(thresholdCritical)
                             if( regexC.test(val) ) {
                                 returnType= "C"
-                            } 
+                            }
                         }
-
-
                     } catch(e) {
                         console.error(`regex failed`)
                     }
@@ -198,7 +193,6 @@ export default class WidgetNRQL extends Component {
             return formattedVal
         }
 
-
         if(data) {
             let {current, history} = data
 
@@ -207,14 +201,12 @@ export default class WidgetNRQL extends Component {
             for (let i=1; i <=24; i++) {
                 if(history[history.length-i]) {
                     historyBlocks.push({status:determineStatus(history[history.length-i].value), value:formatValue(history[history.length-i].value)+toolTipValueSuffix, startTime: history[history.length-i].startTime, endTime: history[history.length-i].endTime})
-                    
-                }     
+                }
             }
 
             //extra info processor
             let info=null, infoTooltip=null
             if(customFeature) {
-                
                 //support for plugging in your own custom features here!
                 switch(customFeature) {
                     case "example":
@@ -227,14 +219,11 @@ export default class WidgetNRQL extends Component {
                     // case "somethingElse":
                     //     break;
                 }
-                
             }
 
             return <StatusBlock title={title} bigValue={formatValue(current)} bigValueLabel={valueLabel} bigValueSuffix={valueSuffix} status={determineStatus(current)} history={historyBlocks} info={info} infoTooltip={infoTooltip} link={link}/>
         } else {
             return <><StatusBlock title={title} /></>
         }
-       
-        
     }
 }
