@@ -84,8 +84,11 @@ export default class WidgetNRQL extends Component {
             let bucketData=results.data.actor.account.buckets.results
 
             let itemCurrentData=null
+            let checkedField = field
+            let checkedSubField = subField
+
             if (results.data.actor.account.recent.results.length > 0){
-                let checkedField = checkFieldName(field, results.data.actor.account.recent.results[0])
+                checkedField = checkFieldName(field, results.data.actor.account.recent.results[0], config.debugMode)
 
                 if (results.data.actor.account.recent.results[0][checkedField] !== undefined) {
                     itemCurrentData = results.data.actor.account.recent.results[0][checkedField]
@@ -94,23 +97,20 @@ export default class WidgetNRQL extends Component {
                 }
 
                 if (typeof results.data.actor.account.recent.results[0][checkedField] === 'object') {
-                    if (subField == null) {
-                        itemCurrentData = null
-                        console.error(`Error with '${config.title}' panel: Please supply a sub field name to access the object returned.`, results.data.actor.account.buckets.results)
-                    } else {
-                        itemCurrentData = results.data.actor.account.recent.results[0][checkedField][subField]
+                    checkedSubField = checkFieldName(subField, results.data.actor.account.recent.results[0][checkedField], config.debugMode)
 
-                        if (itemCurrentData === undefined) {
-                            itemCurrentData = null
-                            console.error(`Error with '${config.title}' panel: The provided sub field name does is incorrect.`, results.data.actor.account.buckets.results)
-                        }
+                    itemCurrentData = results.data.actor.account.recent.results[0][checkedField][checkedSubField]
+
+                    if (itemCurrentData === undefined) {
+                        itemCurrentData = null
+                        console.error(`Error with '${config.title}' panel: The provided sub field name does is incorrect.`, results.data.actor.account.buckets.results)
                     }
                 }
             }
 
             let data = {
                 "current": itemCurrentData,
-                "history": bucketData.map((item)=>{let itemHistoryData = subField ? item[checkedField][subField] : item[checkedField]; return {value: itemHistoryData, startTime:item.beginTimeSeconds, endTime: item.endTimeSeconds}})
+                "history": bucketData.map((item)=>{ return { value: checkedSubField ? item[checkedField][checkedSubField] : item[checkedField], startTime:item.beginTimeSeconds, endTime: item.endTimeSeconds }})
             }
 
             if(additionalQueries) {
@@ -231,14 +231,16 @@ export default class WidgetNRQL extends Component {
     }
 }
 
-function checkFieldName (field, results) {
+function checkFieldName (field, results, isDebug) {
     let ret = field
 
     if (field == null) {
         if (Object.getOwnPropertyNames(results)[0] != null) {
             ret = Object.getOwnPropertyNames(results)[0]
 
-            console.log(`No field name was specified, defaulting to first property name '${ret}'.`)
+            if (isDebug) {
+                console.log(`No field name was specified, defaulting to first property name '${ret}'.`)
+            }
         }
     }
 
