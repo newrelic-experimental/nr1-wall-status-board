@@ -99,7 +99,9 @@ export default class WidgetNRQL extends Component {
                 if (typeof results.data.actor.account.recent.results[0][checkedField] === 'object') {
                     checkedSubField = checkFieldName(subField, results.data.actor.account.recent.results[0][checkedField], config.debugMode)
 
-                    itemCurrentData = results.data.actor.account.recent.results[0][checkedField][checkedSubField]
+                    if (checkedSubField) {
+                        itemCurrentData = results.data.actor.account.recent.results[0][checkedField][checkedSubField]
+                    }
 
                     if (itemCurrentData === undefined) {
                         itemCurrentData = null
@@ -234,7 +236,7 @@ export default class WidgetNRQL extends Component {
 function checkFieldName (field, results, isDebug) {
     let ret = field
 
-    if (field == null) {
+    if ((typeof field !== "undefined") && field == null) {
         if (Object.getOwnPropertyNames(results)[0] != null) {
             ret = Object.getOwnPropertyNames(results)[0]
 
