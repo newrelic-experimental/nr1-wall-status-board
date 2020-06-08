@@ -90,18 +90,19 @@ export default class WidgetNRQL extends Component {
             if (results.data.actor.account.recent.results.length > 0){
                 checkedField = checkFieldName(field, results.data.actor.account.recent.results[0], config.debugMode)
 
-                if (results.data.actor.account.recent.results[0][checkedField] !== undefined) {
+                if (results.data.actor.account.recent.results[0][checkedField] != null) {
                     itemCurrentData = results.data.actor.account.recent.results[0][checkedField]
-                } else {
+                } else if (results.data.actor.account.recent.results[0][checkedField] === null) {
+                    console.error(`No data found for panel '${config.title}': Please check the NRQL query to ensure it returns a result.`, results.data.actor.account.buckets.results)
+                }
+                 else {
                     console.error(`Error with '${config.title}' panel: Please supply a field name to access the data returned.`, results.data.actor.account.buckets.results)
                 }
 
-                if (typeof results.data.actor.account.recent.results[0][checkedField] === 'object') {
+                if (results.data.actor.account.recent.results[0][checkedField] != null && typeof results.data.actor.account.recent.results[0][checkedField] === 'object') {
                     checkedSubField = checkFieldName(subField, results.data.actor.account.recent.results[0][checkedField], config.debugMode)
 
-                    if (checkedSubField) {
-                        itemCurrentData = results.data.actor.account.recent.results[0][checkedField][checkedSubField]
-                    }
+                    itemCurrentData = results.data.actor.account.recent.results[0][checkedField][checkedSubField]
 
                     if (itemCurrentData === undefined) {
                         itemCurrentData = null
@@ -236,7 +237,7 @@ export default class WidgetNRQL extends Component {
 function checkFieldName (field, results, isDebug) {
     let ret = field
 
-    if ((typeof field !== "undefined") && field == null) {
+    if (field == null) {
         if (Object.getOwnPropertyNames(results)[0] != null) {
             ret = Object.getOwnPropertyNames(results)[0]
 
