@@ -1,9 +1,10 @@
 [![New Relic Experimental header](https://github.com/newrelic/open-source-office/raw/master/examples/categories/images/Experimental.png)](https://github.com/newrelic/open-source-office/blob/master/examples/categories/index.md#new-relic-experimental)
 
+# New Relic One Wall Status Board (nr1-wall-status-board)
 
-# Wall Status Board
+![CI](https://github.com/newrelic-experimental/nr1-wall-status-board/workflows/CI/badge.svg) ![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic-experimental/nr1-wall-status-board?include_prereleases&sort=semver) [![Snyk](https://snyk.io/test/github/newrelic-experimental/nr1-wall-status-board/badge.svg)](https://snyk.io/test/github/newrelic-experimental/nr1-wall-status-board)
+
 This nerdlet is designed to allow key metrics to be observed in a way that makes incidents and platform state easy to recognise and evaulate with little cognitive effort. The panels change colour based on defined thresholds and the historical state is illustrated to provide context. The nerdlet is intended to be displayed full screen on a TV on the wall and be understood at a distance -  but you can of course use it how you like.
-
 
 ## Features
 - Fully configurable through UI (which is persistently stored by account)
