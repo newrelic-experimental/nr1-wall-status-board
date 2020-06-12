@@ -36,7 +36,7 @@ export default class Configurator extends React.Component {
     The data is then saved to multiple documents of 60k size each 
     */
 
-        const chunkSize= 60000 //60k
+        const chunkSize= 50000 //50k (broke at 60, not sure why)
 
         const splitSlice = function(str, len) {
             var ret = [ ];
