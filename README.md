@@ -28,7 +28,7 @@ This nerdlet is designed to allow key metrics to be observed in a way that makes
 
 
 ## Configuration
-All configuration is driven through the application, click the Configuration button and a form will appear below. Each field is described. Some of the more interseting settings are discussed here:
+All configuration is driven through the application, click the Configuration button and a form will appear below. Each field is described. Some of the more interesting settings are discussed here. Note that for each panel there may be options for the type of panel. Current values include "NRQL query with threshold" which should normally e used and "Place holder". The place holder is simply to allow you to demo the wall board with placeholder panels.
 
 #### Default refresh rate
 Each panel will auto refresh at this rate.
