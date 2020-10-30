@@ -63,12 +63,24 @@ export default class WidgetNRQL extends Component {
             })
         }
 
+        //Determine where to place TIMESERIES keyword. For Nested aggregation queries we need to place in multiple places so we look for the token [[TIMESERIES]] and replace it
+        let recentQuery=nrql.includes('[[TIMESERIES]]') ?
+                `${nrql.replaceAll('[[TIMESERIES]]','')} since ${sinceAdjusted} minutes ago until ${untilSeconds} seconds ago`
+            :
+                `${nrql} since ${sinceAdjusted} minutes ago until ${untilSeconds} seconds ago`;
+
+
+        let bucketQuery=nrql.includes('[[TIMESERIES]]') ?
+                `${nrql.replaceAll('[[TIMESERIES]]', `timeseries ${bucketSize} minutes`)} since ${startTime.unix()} until ${endTime.unix()}`
+            :
+                `${nrql} since ${startTime.unix()} until ${endTime.unix()}  timeseries ${bucketSize} minutes`;
+            
         let query = `
         query($id: Int!) {
             actor {
                 account(id: $id) {
-                    recent: nrql(query: "${nrql} since ${sinceAdjusted} minutes ago until ${untilSeconds} seconds ago") {results}
-                    buckets: nrql(query: "${nrql} timeseries ${bucketSize} minutes since ${startTime.unix()} until ${endTime.unix()}") {results}
+                    recent: nrql(query: "${recentQuery}") {results}
+                    buckets: nrql(query: "${bucketQuery}") {results}
                     ${extraNRQL}
                 }
             }
@@ -79,6 +91,7 @@ export default class WidgetNRQL extends Component {
         x.then(results => {
             if(config.debugMode===true) {
                 console.log(`DEBUG MODE ENABLED: ${config.title}`,results.data.actor.account)
+                console.log(`GQL Query was:`,query)
             }
 
             let bucketData=results.data.actor.account.buckets.results

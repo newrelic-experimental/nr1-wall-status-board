@@ -48,3 +48,5 @@ You can provide thresholds for warning and critical states. These can either be 
 #### Panels: Custom Features
 An example custom feature is included called `example`. What this demonstrates is how to specify additional NRQL queries for the panel to enrich it further. For instance the demo data shows the numer of transactions for all apps, and then as an enrichment shows how many apps are reporting. Its possible to easily add extra features like this without the need to worry about the loading of data..
 
+#### Panels: Nested Aggregation support
+If your NRQL uses nested aggreation you must indicate where the timeseries keyword should be injected. Add the token `[[TIMESERIES]]` in all the applicable places. e.g. `select sum(foo) as total from (SELECT count(*) as 'foo' from Transaction facet appName [[TIMESERIES]]) [[TIMESERIES]]`

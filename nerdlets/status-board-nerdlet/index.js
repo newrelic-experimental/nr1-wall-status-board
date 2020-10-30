@@ -78,9 +78,9 @@ export default class StatusBoardNerdlet extends React.Component {
                                         "widgets" : {
                                             "type": "array",
                                             "title": "Panels",
+                                            "description": "Add as many widgets to the group as you like. They will be displayed in the order here.",
                                             "items": {
                                                 "type": "object",
-                                                "description": "Add as many widgets to the group as you like. They will be displayed in the order here.",
                                                 "anyOf": [
                                                     {
                                                         "title": "NRQL query with threshold",
