@@ -149,7 +149,7 @@ export default class Configurator extends React.Component {
                 if (hasDefault) {
                     this.setState({ persistentData: this.props.default, dataLoaded: true });
                     this.props.dataChangeHandler(this.props.default);
-                    this.saveToStorage(this.props.default);
+                    //this.saveToStorage(this.props.default); //this can be buggy, instead lets allow user to choose to save.
                 }
                 else {
                     this.setState({ persistentData: {}, dataLoaded: true });
