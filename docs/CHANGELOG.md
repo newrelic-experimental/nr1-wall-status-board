@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/newrelic-experimental/nr1-wall-status-board/compare/v1.1.0...v1.1.1) (2020-11-27)
+
+
+### Bug Fixes
+
+* default config bug ([94104dd](https://github.com/newrelic-experimental/nr1-wall-status-board/commit/94104ddbc56db48451732d9ce5a83a12a3b6190b))
+
 # [1.1.0](https://github.com/newrelic-experimental/nr1-wall-status-board/compare/v1.0.0...v1.1.0) (2020-10-30)
 
 
