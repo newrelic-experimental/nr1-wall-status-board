@@ -1,5 +1,20 @@
-[![New Relic Experimental header](https://github.com/newrelic/open-source-office/raw/master/examples/categories/images/Experimental.png)](https://github.com/newrelic/open-source-office/blob/master/examples/categories/index.md#new-relic-experimental)
+[![New Relic Experimental header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Experimental.png)](https://opensource.newrelic.com/oss-category/#new-relic-experimental)
 
+# Automated Apdex Thresholds 
+![GitHub forks](https://img.shields.io/github/forks/newrelic-experimental/newrelic-experimental/nr1-wall-status-board?style=social)
+![GitHub stars](https://img.shields.io/github/stars/newrelic-experimental/newrelic-experimental/nr1-wall-status-board?style=social)
+![GitHub watchers](https://img.shields.io/github/watchers/newrelic-experimental/newrelic-experimental/nr1-wall-status-board?style=social)
+
+![GitHub all releases](https://img.shields.io/github/downloads/newrelic-experimental/newrelic-experimental/nr1-wall-status-board/total)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/newrelic-experimental/newrelic-experimental/nr1-wall-status-board)
+![GitHub last commit](https://img.shields.io/github/last-commit/newrelic-experimental/newrelic-experimental/nr1-wall-status-board)
+![GitHub Release Date](https://img.shields.io/github/release-date/newrelic-experimental/newrelic-experimental/nr1-wall-status-board)
+
+
+![GitHub issues](https://img.shields.io/github/issues/newrelic-experimental/newrelic-experimental/nr1-wall-status-board)
+![GitHub issues closed](https://img.shields.io/github/issues-closed/newrelic-experimental/newrelic-experimental/nr1-wall-status-board)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/newrelic-experimental/newrelic-experimental/nr1-wall-status-board)
+![GitHub pull requests closed](https://img.shields.io/github/issues-pr-closed/newrelic-experimental/newrelic-experimental/nr1-wall-status-board)
 # New Relic One Wall Status Board (nr1-wall-status-board)
 
 ![CI](https://github.com/newrelic-experimental/nr1-wall-status-board/workflows/CI/badge.svg) ![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic-experimental/nr1-wall-status-board?include_prereleases&sort=semver) [![Snyk](https://snyk.io/test/github/newrelic-experimental/nr1-wall-status-board/badge.svg)](https://snyk.io/test/github/newrelic-experimental/nr1-wall-status-board)
