@@ -33,7 +33,7 @@ code, the source code can be found at [https://github.com/newrelic-experimental/
 
 ### moment
 
-This product includes source derived from [moment](https://github.com/moment/moment) ([v2.29.2](https://github.com/moment/moment/tree/v2.29.2)), distributed under the [MIT License](https://github.com/moment/moment/blob/v2.29.2/LICENSE):
+This product includes source derived from [moment](https://github.com/moment/moment) ([v2.29.3](https://github.com/moment/moment/tree/v2.29.3)), distributed under the [MIT License](https://github.com/moment/moment/blob/v2.29.3/LICENSE):
 
 ```
 Copyright (c) JS Foundation and other contributors
