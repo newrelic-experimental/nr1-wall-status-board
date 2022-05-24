@@ -359,7 +359,7 @@ export default class StatusBoardNerdlet extends React.Component {
                     page: currentPage,
                     tvMode: true
                 })
-                pagesTVMode=<a target="_blank" href={this.newrelicBaseUrl+nerdletLocation.pathname+'?platform[tvMode]=true&'+nerdletLocation.search} className="u-unstyledLink pageLink" >TV Mode</a> 
+                pagesTVMode=<a target="_blank" href={this.newrelicBaseUrl+nerdletLocation.pathname+'?tv-mode&'+nerdletLocation.search} className="u-unstyledLink pageLink" >TV Mode</a> 
                 
     }
             
