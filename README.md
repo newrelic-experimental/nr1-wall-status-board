@@ -1,6 +1,6 @@
 [![New Relic Experimental header](https://github.com/newrelic/opensource-website/raw/master/src/images/categories/Experimental.png)](https://opensource.newrelic.com/oss-category/#new-relic-experimental)
 
-# Automated Apdex Thresholds 
+# New Relic One Wall Status Board 
 ![GitHub forks](https://img.shields.io/github/forks/newrelic-experimental/newrelic-experimental/nr1-wall-status-board?style=social)
 ![GitHub stars](https://img.shields.io/github/stars/newrelic-experimental/newrelic-experimental/nr1-wall-status-board?style=social)
 ![GitHub watchers](https://img.shields.io/github/watchers/newrelic-experimental/newrelic-experimental/nr1-wall-status-board?style=social)
@@ -15,9 +15,6 @@
 ![GitHub issues closed](https://img.shields.io/github/issues-closed/newrelic-experimental/newrelic-experimental/nr1-wall-status-board)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/newrelic-experimental/newrelic-experimental/nr1-wall-status-board)
 ![GitHub pull requests closed](https://img.shields.io/github/issues-pr-closed/newrelic-experimental/newrelic-experimental/nr1-wall-status-board)
-# New Relic One Wall Status Board (nr1-wall-status-board)
-
-![CI](https://github.com/newrelic-experimental/nr1-wall-status-board/workflows/CI/badge.svg) ![GitHub release (latest SemVer including pre-releases)](https://img.shields.io/github/v/release/newrelic-experimental/nr1-wall-status-board?include_prereleases&sort=semver) [![Snyk](https://snyk.io/test/github/newrelic-experimental/nr1-wall-status-board/badge.svg)](https://snyk.io/test/github/newrelic-experimental/nr1-wall-status-board)
 
 This nerdlet is designed to allow key metrics to be observed in a way that makes incidents and platform state easy to recognise and evaulate with little cognitive effort. The panels change colour based on defined thresholds and the historical state is illustrated to provide context. The nerdlet is intended to be displayed full screen on a TV on the wall and be understood at a distance -  but you can of course use it how you like.
 
