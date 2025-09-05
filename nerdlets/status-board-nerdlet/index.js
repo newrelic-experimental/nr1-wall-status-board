@@ -24,7 +24,7 @@ export default class StatusBoardNerdlet extends React.Component {
         //example config for when nerdlet is first installed
         this.defaultConfig={"autoRefresh":30,"pageAutoRotate":30,"pages":[{"title":"Operational Status","linkTitle":"Front End","groups":[{"title":"Group 1","widgets":[{"bucketSize":5,"untilSeconds":60,"additionalQueries":{"exampleQuery":"select uniqueCount(appName) as apps from Transaction "},"title":"Throughput","nrql":"select count(*)/5  as total from Transaction","field":"total","link":"https://www.google.com","customFeature":"example","thresholdDirection":"above","valueLabel":"Transactions","debugMode":false,"thresholdType":"numeric","valueSuffix":"rpm","roundTo":0},{"ph_title":"Example Placeholder","ph_status":"C","ph_label":"Something Bad"}]},{"title":"Backend","widgets":[{"ph_title":"Important Metric","ph_status":"W","ph_label":"An Example"}]},{"title":"Services","widgets":[{"ph_title":"Example Placeholder"}]}],"groupColumns":2},{"title":"Another Page!","linkTitle":"Page 2","groups":[{"title":"Example Group","widgets":[{"ph_title":"Placeholder","ph_status":"N"}]}],"groupColumns":1}]}
         
-        this.state = { config: null, autoPage: null}
+        this.state = { config: null, autoPage: null,chosenPage: null}
         this.autoPageTimer= null
         this.cyclePage=this.cyclePage.bind(this)
         this.schema = {
@@ -281,7 +281,7 @@ export default class StatusBoardNerdlet extends React.Component {
 
         return  <NerdletStateContext.Consumer>
         {(nerdletState) => {
-            let {config, autoPage} = this.state
+            let {config, autoPage, chosenPage} = this.state
 
             let statusBoard=<div className="ConfigLoader"><Spinner inline spacingType={[Spinner.SPACING_TYPE.NONE,Spinner.SPACING_TYPE.SMALL,Spinner.SPACING_TYPE.NONE,Spinner.SPACING_TYPE.NONE]} /> Loading configuration... </div>
             let pages, pagesTVMode, pageTitle, bottomConfigBar
@@ -299,8 +299,8 @@ export default class StatusBoardNerdlet extends React.Component {
 
                     }
                 } else {
-                    //no auto-roatet so just show selected page
-                    currentPage=nerdletState && nerdletState.page ? nerdletState.page : 0
+                    //no auto-rotate so just show selected page
+                    currentPage=chosenPage!== null ? chosenPage  : 0;
                     
                 }
 
@@ -348,11 +348,10 @@ export default class StatusBoardNerdlet extends React.Component {
 
                 //page navigation 
                 pages=config.pages.map((page,idx)=>{
-                    let nerdletLocation=nerdlet.getSetUrlStateLocation({
-                        page: idx,
-                        tvMode: false
-                    })
-                    return <Link key={idx} to={nerdletLocation} className="u-unstyledLink pageLink" >{page.linkTitle ? page.linkTitle : page.title}</Link> 
+                    const pageChangeFn=()=>{
+                        this.setState({chosenPage: idx});
+                    }
+                    return <Link key={idx} className="u-unstyledLink pageLink" onClick={pageChangeFn}>{page.linkTitle ? page.linkTitle : page.title}</Link> 
                 })
 
                 let nerdletLocation=nerdlet.getSetUrlStateLocation({
